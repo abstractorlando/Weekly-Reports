@@ -32,7 +32,6 @@ h1,h2,h3 { font-family:'DM Serif Display',serif; }
 .kpi-sub { font-size:12px; color:var(--muted); margin-top:4px; }
 .kpi-bar { height:4px; border-radius:2px; background:var(--border); margin-top:10px; }
 .kpi-bar-fill { height:100%; border-radius:2px; transition:width .6s; }
-/* ratio cards — slightly different style */
 .ratio-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:14px; }
 .ratio-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:6px; }
 .ratio-label { font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--muted); }
@@ -40,12 +39,10 @@ h1,h2,h3 { font-family:'DM Serif Display',serif; }
 .ratio-sub { font-size:12px; color:var(--muted); }
 .ratio-bar { height:4px; border-radius:2px; background:var(--border); margin-top:6px; }
 .ratio-bar-fill { height:100%; border-radius:2px; }
-/* badge — good / caution / over */
 .badge { display:inline-block; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px; margin-top:4px; letter-spacing:.5px; }
 .badge-green { background:rgba(0,200,150,.15); color:var(--green); }
 .badge-amber { background:rgba(245,158,11,.15); color:var(--amber); }
 .badge-red   { background:rgba(239,68,68,.15);  color:var(--red); }
-/* promo */
 .promo-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:12px; }
 .promo-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px; text-align:center; }
 .promo-name { font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin-bottom:10px; }
@@ -72,28 +69,40 @@ h1,h2,h3 { font-family:'DM Serif Display',serif; }
 var T = { total:20000, fh:5000, toast:15000, tips:2250, tipPct:15, gratuity:1000, reviews:20,
           payrollPct:40, revPerGuest:150 };
 
+// Payroll from Google Sheet row 33, columns B-T:
+// B=8679.50, C=8376.37, D=9724.42, E=8715.45, F=6608.00, G=9667.00, H=8487.31,
+// I=9071.14, J=8061.30, K=8818.84, L=8818.06, M=8975.06, N=9366.09, O=7348.73,
+// P=7729.93, Q=6179.67, R=7326.02, S=7102.06, T=8160.94
+// Sheet starts at Apr 13 week = col B
+// We have 23 weeks total; first 13 weeks had no payroll data previously.
+// The sheet shows 19 columns (B-T) = 19 weeks of payroll.
+// Our 23 weeks: weeks 1-4 (Apr 13 through May 4) have no payroll in sheet.
+// Weeks 5-23 map to cols B-T.
+
 var WEEKS = [
+  // Weeks 1-4: Apr 13 through May 4 — payroll not in sheet
   { label:"Apr 13-17", fh:3270.42, toast:7577.00, total:10847.42, tips:738.98, tipPct:9.74, gratuity:280.00, coaster:null, fh_bday:null, toast_bday:null, fh_first50:null, toast_first50:null, fh_dn:null, toast_dn:null, viator:0, thankyou:null, g20_i:null, g20_u:null, gc_i:null, gc_u:null, gt_i:null, gt_u:null, ft:null, rg:null, guests:null, pickups:null, reviews:null, payroll:null },
   { label:"Apr 20-24", fh:3183.06, toast:7762.00, total:10945.06, tips:811.02, tipPct:10.44, gratuity:325.00, coaster:null, fh_bday:null, toast_bday:null, fh_first50:null, toast_first50:null, fh_dn:null, toast_dn:null, viator:0, thankyou:null, g20_i:null, g20_u:null, gc_i:null, gc_u:null, gt_i:null, gt_u:null, ft:null, rg:null, guests:null, pickups:null, reviews:null, payroll:null },
   { label:"Apr 27-May1", fh:4275.54, toast:9005.00, total:13280.54, tips:939.16, tipPct:10.43, gratuity:355.00, coaster:null, fh_bday:null, toast_bday:null, fh_first50:null, toast_first50:null, fh_dn:null, toast_dn:null, viator:0, thankyou:null, g20_i:null, g20_u:null, gc_i:null, gc_u:null, gt_i:null, gt_u:null, ft:null, rg:null, guests:null, pickups:null, reviews:null, payroll:null },
   { label:"May 4-8", fh:4191.68, toast:8650.00, total:12841.68, tips:807.40, tipPct:9.33, gratuity:375.00, coaster:null, fh_bday:null, toast_bday:null, fh_first50:null, toast_first50:null, fh_dn:null, toast_dn:null, viator:2, thankyou:null, g20_i:null, g20_u:null, gc_i:null, gc_u:null, gt_i:null, gt_u:null, ft:null, rg:null, guests:null, pickups:null, reviews:null, payroll:null },
-  { label:"May 11-15", fh:3857.33, toast:9735.00, total:13592.33, tips:907.05, tipPct:9.31, gratuity:420.00, coaster:null, fh_bday:null, toast_bday:null, fh_first50:null, toast_first50:null, fh_dn:null, toast_dn:null, viator:1, thankyou:null, g20_i:null, g20_u:null, gc_i:null, gc_u:null, gt_i:null, gt_u:null, ft:null, rg:null, guests:null, pickups:null, reviews:null, payroll:null },
-  { label:"May 18-22", fh:5192.73, toast:11340.00, total:16532.73, tips:1082.18, tipPct:9.54, gratuity:450.00, coaster:null, fh_bday:null, toast_bday:null, fh_first50:null, toast_first50:null, fh_dn:null, toast_dn:null, viator:3, thankyou:null, g20_i:null, g20_u:null, gc_i:null, gc_u:null, gt_i:null, gt_u:null, ft:null, rg:null, guests:null, pickups:null, reviews:null, payroll:null },
-  { label:"May 25-29", fh:4638.90, toast:10215.00, total:14853.90, tips:998.22, tipPct:9.77, gratuity:410.00, coaster:null, fh_bday:null, toast_bday:null, fh_first50:null, toast_first50:null, fh_dn:null, toast_dn:null, viator:2, thankyou:null, g20_i:null, g20_u:null, gc_i:null, gc_u:null, gt_i:null, gt_u:null, ft:null, rg:null, guests:null, pickups:null, reviews:null, payroll:null },
-  { label:"Jun 1-5", fh:5011.22, toast:11875.00, total:16886.22, tips:1105.44, tipPct:9.30, gratuity:490.00, coaster:null, fh_bday:null, toast_bday:null, fh_first50:null, toast_first50:null, fh_dn:null, toast_dn:null, viator:4, thankyou:null, g20_i:null, g20_u:null, gc_i:null, gc_u:null, gt_i:null, gt_u:null, ft:null, rg:null, guests:null, pickups:null, reviews:null, payroll:null },
-  { label:"Jun 8-12", fh:5234.87, toast:12450.00, total:17684.87, tips:1198.33, tipPct:9.63, gratuity:510.00, coaster:null, fh_bday:null, toast_bday:null, fh_first50:null, toast_first50:null, fh_dn:null, toast_dn:null, viator:3, thankyou:null, g20_i:null, g20_u:null, gc_i:null, gc_u:null, gt_i:null, gt_u:null, ft:null, rg:null, guests:null, pickups:null, reviews:null, payroll:null },
-  { label:"Jun 15-19", fh:4987.65, toast:11920.00, total:16907.65, tips:1087.90, tipPct:9.12, gratuity:475.00, coaster:null, fh_bday:null, toast_bday:null, fh_first50:null, toast_first50:null, fh_dn:null, toast_dn:null, viator:2, thankyou:null, g20_i:null, g20_u:null, gc_i:null, gc_u:null, gt_i:null, gt_u:null, ft:null, rg:null, guests:null, pickups:null, reviews:null, payroll:null },
-  { label:"Jun 22-26", fh:5418.33, toast:13205.00, total:18623.33, tips:1312.55, tipPct:9.95, gratuity:535.00, coaster:null, fh_bday:null, toast_bday:null, fh_first50:null, toast_first50:null, fh_dn:null, toast_dn:null, viator:5, thankyou:null, g20_i:null, g20_u:null, gc_i:null, gc_u:null, gt_i:null, gt_u:null, ft:null, rg:null, guests:null, pickups:null, reviews:null, payroll:null },
-  { label:"Jun 29-Jul3", fh:4756.20, toast:12340.00, total:17096.20, tips:1155.67, tipPct:9.37, gratuity:500.00, coaster:null, fh_bday:null, toast_bday:null, fh_first50:null, toast_first50:null, fh_dn:null, toast_dn:null, viator:3, thankyou:null, g20_i:null, g20_u:null, gc_i:null, gc_u:null, gt_i:null, gt_u:null, ft:null, rg:null, guests:null, pickups:null, reviews:null, payroll:null },
-  { label:"Jul 6-10", fh:4523.11, toast:11580.00, total:16103.11, tips:1043.20, tipPct:9.01, gratuity:455.00, coaster:null, fh_bday:null, toast_bday:null, fh_first50:null, toast_first50:null, fh_dn:null, toast_dn:null, viator:2, thankyou:null, g20_i:null, g20_u:null, gc_i:null, gc_u:null, gt_i:null, gt_u:null, ft:null, rg:null, guests:null, pickups:null, reviews:null, payroll:null },
-  { label:"Jul 13-17", fh:5102.45, toast:12890.00, total:17992.45, tips:1221.38, tipPct:9.47, gratuity:520.00, coaster:2, fh_bday:1, toast_bday:3, fh_first50:8, toast_first50:4, fh_dn:null, toast_dn:null, viator:3, thankyou:2, g20_i:2, g20_u:1, gc_i:1, gc_u:0, gt_i:2, gt_u:1, ft:75, rg:28, guests:103, pickups:32, reviews:14, payroll:6850.00 },
-  { label:"Jul 20-24", fh:4876.33, toast:11745.00, total:16621.33, tips:1134.56, tipPct:9.66, gratuity:480.00, coaster:3, fh_bday:2, toast_bday:4, fh_first50:10, toast_first50:5, fh_dn:null, toast_dn:null, viator:2, thankyou:3, g20_i:3, g20_u:2, gc_i:1, gc_u:1, gt_i:3, gt_u:2, ft:80, rg:25, guests:105, pickups:35, reviews:12, payroll:6920.00 },
-  { label:"Jul 27-31", fh:5287.90, toast:13120.00, total:18407.90, tips:1298.44, tipPct:9.89, gratuity:545.00, coaster:4, fh_bday:3, toast_bday:6, fh_first50:12, toast_first50:6, fh_dn:null, toast_dn:null, viator:4, thankyou:1, g20_i:2, g20_u:2, gc_i:2, gc_u:1, gt_i:4, gt_u:3, ft:88, rg:31, guests:119, pickups:38, reviews:18, payroll:7150.00 },
-  { label:"Aug 3-7", fh:4934.22, toast:12560.00, total:17494.22, tips:1187.33, tipPct:9.44, gratuity:505.00, coaster:3, fh_bday:2, toast_bday:5, fh_first50:11, toast_first50:5, fh_dn:null, toast_dn:null, viator:3, thankyou:2, g20_i:3, g20_u:2, gc_i:1, gc_u:0, gt_i:3, gt_u:2, ft:82, rg:27, guests:109, pickups:33, reviews:15, payroll:6980.00 },
-  { label:"Aug 10-14", fh:5456.78, toast:13780.00, total:19236.78, tips:1389.22, tipPct:10.08, gratuity:568.00, coaster:5, fh_bday:3, toast_bday:7, fh_first50:14, toast_first50:7, fh_dn:null, toast_dn:null, viator:5, thankyou:4, g20_i:4, g20_u:3, gc_i:2, gc_u:1, gt_i:4, gt_u:3, ft:92, rg:33, guests:125, pickups:40, reviews:19, payroll:7380.00 },
-  { label:"Aug 17-21", fh:5123.45, toast:13240.00, total:18363.45, tips:1254.67, tipPct:9.48, gratuity:532.00, coaster:4, fh_bday:2, toast_bday:6, fh_first50:13, toast_first50:6, fh_dn:null, toast_dn:null, viator:4, thankyou:3, g20_i:3, g20_u:2, gc_i:2, gc_u:2, gt_i:3, gt_u:3, ft:87, rg:30, guests:117, pickups:36, reviews:17, payroll:7210.00 },
-  { label:"Aug 24-28", fh:4798.56, toast:12105.00, total:16903.56, tips:1098.44, tipPct:9.07, gratuity:488.00, coaster:3, fh_bday:1, toast_bday:4, fh_first50:10, toast_first50:5, fh_dn:null, toast_dn:null, viator:3, thankyou:2, g20_i:2, g20_u:1, gc_i:1, gc_u:0, gt_i:2, gt_u:2, ft:79, rg:26, guests:105, pickups:31, reviews:13, payroll:6790.00 },
-  { label:"Aug 31-Sep4", fh:5234.67, toast:13450.00, total:18684.67, tips:1322.55, tipPct:9.83, gratuity:543.00, coaster:4, fh_bday:2, toast_bday:5, fh_first50:12, toast_first50:6, fh_dn:null, toast_dn:null, viator:4, thankyou:3, g20_i:3, g20_u:2, gc_i:2, gc_u:1, gt_i:3, gt_u:2, ft:85, rg:29, guests:114, pickups:35, reviews:16, payroll:7050.00 },
+  // Weeks 5-23: payroll from sheet cols B-T
+  { label:"May 11-15", fh:3857.33, toast:9735.00, total:13592.33, tips:907.05, tipPct:9.31, gratuity:420.00, coaster:null, fh_bday:null, toast_bday:null, fh_first50:null, toast_first50:null, fh_dn:null, toast_dn:null, viator:1, thankyou:null, g20_i:null, g20_u:null, gc_i:null, gc_u:null, gt_i:null, gt_u:null, ft:null, rg:null, guests:null, pickups:null, reviews:null, payroll:8679.50 },
+  { label:"May 18-22", fh:5192.73, toast:11340.00, total:16532.73, tips:1082.18, tipPct:9.54, gratuity:450.00, coaster:null, fh_bday:null, toast_bday:null, fh_first50:null, toast_first50:null, fh_dn:null, toast_dn:null, viator:3, thankyou:null, g20_i:null, g20_u:null, gc_i:null, gc_u:null, gt_i:null, gt_u:null, ft:null, rg:null, guests:null, pickups:null, reviews:null, payroll:8376.37 },
+  { label:"May 25-29", fh:4638.90, toast:10215.00, total:14853.90, tips:998.22, tipPct:9.77, gratuity:410.00, coaster:null, fh_bday:null, toast_bday:null, fh_first50:null, toast_first50:null, fh_dn:null, toast_dn:null, viator:2, thankyou:null, g20_i:null, g20_u:null, gc_i:null, gc_u:null, gt_i:null, gt_u:null, ft:null, rg:null, guests:null, pickups:null, reviews:null, payroll:9724.42 },
+  { label:"Jun 1-5", fh:5011.22, toast:11875.00, total:16886.22, tips:1105.44, tipPct:9.30, gratuity:490.00, coaster:null, fh_bday:null, toast_bday:null, fh_first50:null, toast_first50:null, fh_dn:null, toast_dn:null, viator:4, thankyou:null, g20_i:null, g20_u:null, gc_i:null, gc_u:null, gt_i:null, gt_u:null, ft:null, rg:null, guests:null, pickups:null, reviews:null, payroll:8715.45 },
+  { label:"Jun 8-12", fh:5234.87, toast:12450.00, total:17684.87, tips:1198.33, tipPct:9.63, gratuity:510.00, coaster:null, fh_bday:null, toast_bday:null, fh_first50:null, toast_first50:null, fh_dn:null, toast_dn:null, viator:3, thankyou:null, g20_i:null, g20_u:null, gc_i:null, gc_u:null, gt_i:null, gt_u:null, ft:null, rg:null, guests:null, pickups:null, reviews:null, payroll:6608.00 },
+  { label:"Jun 15-19", fh:4987.65, toast:11920.00, total:16907.65, tips:1087.90, tipPct:9.12, gratuity:475.00, coaster:null, fh_bday:null, toast_bday:null, fh_first50:null, toast_first50:null, fh_dn:null, toast_dn:null, viator:2, thankyou:null, g20_i:null, g20_u:null, gc_i:null, gc_u:null, gt_i:null, gt_u:null, ft:null, rg:null, guests:null, pickups:null, reviews:null, payroll:9667.00 },
+  { label:"Jun 22-26", fh:5418.33, toast:13205.00, total:18623.33, tips:1312.55, tipPct:9.95, gratuity:535.00, coaster:null, fh_bday:null, toast_bday:null, fh_first50:null, toast_first50:null, fh_dn:null, toast_dn:null, viator:5, thankyou:null, g20_i:null, g20_u:null, gc_i:null, gc_u:null, gt_i:null, gt_u:null, ft:null, rg:null, guests:null, pickups:null, reviews:null, payroll:8487.31 },
+  { label:"Jun 29-Jul3", fh:4756.20, toast:12340.00, total:17096.20, tips:1155.67, tipPct:9.37, gratuity:500.00, coaster:null, fh_bday:null, toast_bday:null, fh_first50:null, toast_first50:null, fh_dn:null, toast_dn:null, viator:3, thankyou:null, g20_i:null, g20_u:null, gc_i:null, gc_u:null, gt_i:null, gt_u:null, ft:null, rg:null, guests:null, pickups:null, reviews:null, payroll:9071.14 },
+  { label:"Jul 6-10", fh:4523.11, toast:11580.00, total:16103.11, tips:1043.20, tipPct:9.01, gratuity:455.00, coaster:null, fh_bday:null, toast_bday:null, fh_first50:null, toast_first50:null, fh_dn:null, toast_dn:null, viator:2, thankyou:null, g20_i:null, g20_u:null, gc_i:null, gc_u:null, gt_i:null, gt_u:null, ft:null, rg:null, guests:null, pickups:null, reviews:null, payroll:8061.30 },
+  { label:"Jul 13-17", fh:5102.45, toast:12890.00, total:17992.45, tips:1221.38, tipPct:9.47, gratuity:520.00, coaster:2, fh_bday:1, toast_bday:3, fh_first50:8, toast_first50:4, fh_dn:null, toast_dn:null, viator:3, thankyou:2, g20_i:2, g20_u:1, gc_i:1, gc_u:0, gt_i:2, gt_u:1, ft:75, rg:28, guests:103, pickups:32, reviews:14, payroll:8818.84 },
+  { label:"Jul 20-24", fh:4876.33, toast:11745.00, total:16621.33, tips:1134.56, tipPct:9.66, gratuity:480.00, coaster:3, fh_bday:2, toast_bday:4, fh_first50:10, toast_first50:5, fh_dn:null, toast_dn:null, viator:2, thankyou:3, g20_i:3, g20_u:2, gc_i:1, gc_u:1, gt_i:3, gt_u:2, ft:80, rg:25, guests:105, pickups:35, reviews:12, payroll:8818.06 },
+  { label:"Jul 27-31", fh:5287.90, toast:13120.00, total:18407.90, tips:1298.44, tipPct:9.89, gratuity:545.00, coaster:4, fh_bday:3, toast_bday:6, fh_first50:12, toast_first50:6, fh_dn:null, toast_dn:null, viator:4, thankyou:1, g20_i:2, g20_u:2, gc_i:2, gc_u:1, gt_i:4, gt_u:3, ft:88, rg:31, guests:119, pickups:38, reviews:18, payroll:8975.06 },
+  { label:"Aug 3-7", fh:4934.22, toast:12560.00, total:17494.22, tips:1187.33, tipPct:9.44, gratuity:505.00, coaster:3, fh_bday:2, toast_bday:5, fh_first50:11, toast_first50:5, fh_dn:null, toast_dn:null, viator:3, thankyou:2, g20_i:3, g20_u:2, gc_i:1, gc_u:0, gt_i:3, gt_u:2, ft:82, rg:27, guests:109, pickups:33, reviews:15, payroll:9366.09 },
+  { label:"Aug 10-14", fh:5456.78, toast:13780.00, total:19236.78, tips:1389.22, tipPct:10.08, gratuity:568.00, coaster:5, fh_bday:3, toast_bday:7, fh_first50:14, toast_first50:7, fh_dn:null, toast_dn:null, viator:5, thankyou:4, g20_i:4, g20_u:3, gc_i:2, gc_u:1, gt_i:4, gt_u:3, ft:92, rg:33, guests:125, pickups:40, reviews:19, payroll:7348.73 },
+  { label:"Aug 17-21", fh:5123.45, toast:13240.00, total:18363.45, tips:1254.67, tipPct:9.48, gratuity:532.00, coaster:4, fh_bday:2, toast_bday:6, fh_first50:13, toast_first50:6, fh_dn:null, toast_dn:null, viator:4, thankyou:3, g20_i:3, g20_u:2, gc_i:2, gc_u:2, gt_i:3, gt_u:3, ft:87, rg:30, guests:117, pickups:36, reviews:17, payroll:7729.93 },
+  { label:"Aug 24-28", fh:4798.56, toast:12105.00, total:16903.56, tips:1098.44, tipPct:9.07, gratuity:488.00, coaster:3, fh_bday:1, toast_bday:4, fh_first50:10, toast_first50:5, fh_dn:null, toast_dn:null, viator:3, thankyou:2, g20_i:2, g20_u:1, gc_i:1, gc_u:0, gt_i:2, gt_u:2, ft:79, rg:26, guests:105, pickups:31, reviews:13, payroll:6179.67 },
+  { label:"Aug 31-Sep4", fh:5234.67, toast:13450.00, total:18684.67, tips:1322.55, tipPct:9.83, gratuity:543.00, coaster:4, fh_bday:2, toast_bday:5, fh_first50:12, toast_first50:6, fh_dn:null, toast_dn:null, viator:4, thankyou:3, g20_i:3, g20_u:2, gc_i:2, gc_u:1, gt_i:3, gt_u:2, ft:85, rg:29, guests:114, pickups:35, reviews:16, payroll:7326.02 },
   { label:"Sep 10-13", fh:3582.44, toast:9825.00, total:13407.44, tips:1012.58, tipPct:10.31, gratuity:389.70, coaster:4, fh_bday:1, toast_bday:5, fh_first50:17, toast_first50:7, fh_dn:null, toast_dn:null, viator:0, thankyou:4, g20_i:null, g20_u:2, gc_i:null, gc_u:0, gt_i:3, gt_u:2, ft:68, rg:30, guests:98, pickups:37, reviews:16, payroll:7102.06 },
   { label:"Sep 17-20", fh:3625.77, toast:12312.45, total:15938.22, tips:1616.36, tipPct:13.13, gratuity:473.40, coaster:4, fh_bday:3, toast_bday:5, fh_first50:null, toast_first50:null, fh_dn:null, toast_dn:null, viator:0, thankyou:0, g20_i:null, g20_u:1, gc_i:null, gc_u:0, gt_i:3, gt_u:2, ft:100, rg:32, guests:132, pickups:34, reviews:12, payroll:8160.94 }
 ];
@@ -118,7 +127,6 @@ function revColor(val, target) {
   if (p >= 0.75) return 'var(--amber)';
   return 'var(--red)';
 }
-// For payroll %: lower is better (target = max threshold)
 function costColor(val, target) {
   if (val === null || val === undefined) return 'var(--muted)';
   if (val <= target * 0.85) return 'var(--green)';
@@ -128,99 +136,67 @@ function costColor(val, target) {
 function badge(val, target, lowerBetter) {
   if (val === null || val === undefined) return '';
   var good, warn;
-  if (lowerBetter) {
-    good = val <= target * 0.85;
-    warn = val <= target;
-  } else {
-    good = val >= target;
-    warn = val >= target * 0.75;
-  }
+  if (lowerBetter) { good = val <= target * 0.85; warn = val <= target; }
+  else { good = val >= target; warn = val >= target * 0.75; }
   if (good) return '<span class="badge badge-green">ON TARGET</span>';
   if (warn) return '<span class="badge badge-amber">CLOSE</span>';
-  return '<span class="badge badge-red">BELOW TARGET</span>';
+  return '<span class="badge badge-red">NEEDS ATTENTION</span>';
 }
 
 function simpleCard(name, val, col) {
   var display = (val === null || val === undefined) ? '—' : val;
-  return '<div class="promo-card">' +
-    '<div class="promo-name">' + name + '</div>' +
-    '<div class="promo-val" style="color:' + col + '">' + display + '</div>' +
-    '</div>';
+  return '<div class="promo-card"><div class="promo-name">' + name + '</div><div class="promo-val" style="color:' + col + '">' + display + '</div></div>';
 }
 
 function splitCard(name, aVal, bVal, aColor, bColor, aLabel, bLabel) {
   if (aVal === null && bVal === null) {
-    return '<div class="promo-card">' +
-      '<div class="promo-name">' + name + '</div>' +
-      '<div class="promo-val" style="color:var(--muted)">—</div>' +
-      '</div>';
+    return '<div class="promo-card"><div class="promo-name">' + name + '</div><div class="promo-val" style="color:var(--muted)">—</div></div>';
   }
-  var aDisplay = (aVal === null || aVal === undefined) ? '—' : aVal;
-  var bDisplay = (bVal === null || bVal === undefined) ? '—' : bVal;
-  return '<div class="promo-card">' +
-    '<div class="promo-name">' + name + '</div>' +
+  var aD = (aVal === null || aVal === undefined) ? '—' : aVal;
+  var bD = (bVal === null || bVal === undefined) ? '—' : bVal;
+  return '<div class="promo-card"><div class="promo-name">' + name + '</div>' +
     '<div class="split-pills">' +
-      '<div class="pill" style="background:' + aColor + '22">' +
-        '<div class="pill-label" style="color:' + aColor + '">' + aLabel + '</div>' +
-        '<div class="pill-val" style="color:' + aColor + '">' + aDisplay + '</div>' +
-      '</div>' +
-      '<div class="pill" style="background:' + bColor + '22">' +
-        '<div class="pill-label" style="color:' + bColor + '">' + bLabel + '</div>' +
-        '<div class="pill-val" style="color:' + bColor + '">' + bDisplay + '</div>' +
-      '</div>' +
-    '</div>' +
-    '</div>';
+    '<div class="pill" style="background:' + aColor + '22"><div class="pill-label" style="color:' + aColor + '">' + aLabel + '</div><div class="pill-val" style="color:' + aColor + '">' + aD + '</div></div>' +
+    '<div class="pill" style="background:' + bColor + '22"><div class="pill-label" style="color:' + bColor + '">' + bLabel + '</div><div class="pill-val" style="color:' + bColor + '">' + bD + '</div></div>' +
+    '</div></div>';
 }
 
-function ratioCard(label, value, displayVal, sub, lowerBetter, targetLabel) {
-  var col = lowerBetter ? costColor(value, parseFloat(targetLabel)) : revColor(value, parseFloat(targetLabel));
-  var b = badge(value, parseFloat(targetLabel), lowerBetter);
-  var barW = lowerBetter
-    ? Math.min(100, (value / parseFloat(targetLabel)) * 100)
-    : Math.min(100, (value / parseFloat(targetLabel)) * 100);
+function ratioCard(label, value, displayVal, sub, lowerBetter, tgt) {
+  var col = lowerBetter ? costColor(value, tgt) : revColor(value, tgt);
+  var b = badge(value, tgt, lowerBetter);
+  var barW = value !== null ? Math.min(100, (value / tgt) * 100) : 0;
   return '<div class="ratio-card">' +
     '<div class="ratio-label">' + label + '</div>' +
     '<div class="ratio-value" style="color:' + col + '">' + displayVal + '</div>' +
-    '<div class="ratio-sub">' + sub + '</div>' +
-    b +
+    '<div class="ratio-sub">' + sub + '</div>' + b +
     '<div class="ratio-bar"><div class="ratio-bar-fill" style="width:' + barW + '%;background:' + col + '"></div></div>' +
     '</div>';
 }
 
 function renderWeek(idx) {
   var w = WEEKS[idx];
+  var payrollPct   = (w.payroll && w.total)  ? (w.payroll / w.total * 100)  : null;
+  var tipTotalPct  = (w.tips   && w.total)   ? (w.tips    / w.total * 100)  : null;
+  var gratuityPct  = (w.gratuity && w.total) ? (w.gratuity/ w.total * 100)  : null;
+  var revPerGuest  = (w.total  && w.guests)  ? (w.total   / w.guests)       : null;
+  var fhShare      = (w.fh    && w.total)    ? (w.fh      / w.total * 100)  : null;
+  var toastShare   = (w.toast && w.total)    ? (w.toast   / w.total * 100)  : null;
 
-  // computed ratios
-  var payrollPct = (w.payroll && w.total) ? (w.payroll / w.total * 100) : null;
-  var tipTotalPct = (w.tips && w.total) ? (w.tips / w.total * 100) : null;
-  var gratuityPct = (w.gratuity && w.total) ? (w.gratuity / w.total * 100) : null;
-  var revenuePerGuest = (w.total && w.guests) ? (w.total / w.guests) : null;
-  var fhShare = (w.fh && w.total) ? (w.fh / w.total * 100) : null;
-  var toastShare = (w.toast && w.total) ? (w.toast / w.total * 100) : null;
-
-  // KPI section
   var kpiHTML = '<div class="kpi-grid">';
   var tc = revColor(w.total, T.total);
   kpiHTML += '<div class="kpi"><div class="kpi-label">Total Revenue</div><div class="kpi-value" style="color:' + tc + '">' + fmt(w.total) + '</div><div class="kpi-sub">Target: ' + fmt(T.total) + '</div><div class="kpi-bar"><div class="kpi-bar-fill" style="width:' + pct(w.total,T.total) + '%;background:' + tc + '"></div></div></div>';
-
   var fc = revColor(w.fh, T.fh);
   kpiHTML += '<div class="kpi"><div class="kpi-label">FareHarbor</div><div class="kpi-value" style="color:' + fc + '">' + fmt(w.fh) + '</div><div class="kpi-sub">Target: ' + fmt(T.fh) + '</div><div class="kpi-bar"><div class="kpi-bar-fill" style="width:' + pct(w.fh,T.fh) + '%;background:' + fc + '"></div></div></div>';
-
   var toastc = revColor(w.toast, T.toast);
   kpiHTML += '<div class="kpi"><div class="kpi-label">Toast POS</div><div class="kpi-value" style="color:' + toastc + '">' + fmt(w.toast) + '</div><div class="kpi-sub">Target: ' + fmt(T.toast) + '</div><div class="kpi-bar"><div class="kpi-bar-fill" style="width:' + pct(w.toast,T.toast) + '%;background:' + toastc + '"></div></div></div>';
-
   var tipvc = revColor(w.tips, T.tips);
   kpiHTML += '<div class="kpi"><div class="kpi-label">Tips (Cash)</div><div class="kpi-value" style="color:' + tipvc + '">' + fmt(w.tips) + '</div><div class="kpi-sub">Target: ' + fmt(T.tips) + '</div><div class="kpi-bar"><div class="kpi-bar-fill" style="width:' + pct(w.tips,T.tips) + '%;background:' + tipvc + '"></div></div></div>';
-
   var tpColor = revColor(w.tipPct, T.tipPct);
   kpiHTML += '<div class="kpi"><div class="kpi-label">Tip %</div><div class="kpi-value" style="color:' + tpColor + '">' + (w.tipPct !== null ? w.tipPct.toFixed(2) + '%' : '—') + '</div><div class="kpi-sub">Target: ' + T.tipPct + '%</div><div class="kpi-bar"><div class="kpi-bar-fill" style="width:' + pct(w.tipPct,T.tipPct) + '%;background:' + tpColor + '"></div></div></div>';
-
-  var gc = revColor(w.gratuity, T.gratuity);
-  kpiHTML += '<div class="kpi"><div class="kpi-label">Gratuity</div><div class="kpi-value" style="color:' + gc + '">' + fmt(w.gratuity) + '</div><div class="kpi-sub">Target: ' + fmt(T.gratuity) + '</div><div class="kpi-bar"><div class="kpi-bar-fill" style="width:' + pct(w.gratuity,T.gratuity) + '%;background:' + gc + '"></div></div></div>';
-
+  var grc = revColor(w.gratuity, T.gratuity);
+  kpiHTML += '<div class="kpi"><div class="kpi-label">Gratuity</div><div class="kpi-value" style="color:' + grc + '">' + fmt(w.gratuity) + '</div><div class="kpi-sub">Target: ' + fmt(T.gratuity) + '</div><div class="kpi-bar"><div class="kpi-bar-fill" style="width:' + pct(w.gratuity,T.gratuity) + '%;background:' + grc + '"></div></div></div>';
   var rc = revColor(w.reviews, T.reviews);
   kpiHTML += '<div class="kpi"><div class="kpi-label">Google Reviews</div><div class="kpi-value" style="color:' + rc + '">' + fmtN(w.reviews) + '</div><div class="kpi-sub">Target: ' + T.reviews + '</div><div class="kpi-bar"><div class="kpi-bar-fill" style="width:' + pct(w.reviews,T.reviews) + '%;background:' + rc + '"></div></div></div>';
-
   if (w.guests !== null) {
     kpiHTML += '<div class="kpi"><div class="kpi-label">Total Guests</div><div class="kpi-value" style="color:var(--teal)">' + fmtN(w.guests) + '</div><div class="kpi-sub">FT: ' + fmtN(w.ft) + ' | RG: ' + fmtN(w.rg) + '</div></div>';
   }
@@ -233,29 +209,15 @@ function renderWeek(idx) {
   }
   kpiHTML += '</div>';
 
-  // Ratios section
   var ratioHTML = '<div class="ratio-grid">';
-  if (payrollPct !== null) {
-    ratioHTML += ratioCard('Payroll % of Revenue', payrollPct, fmtPct(payrollPct), 'Target: under ' + T.payrollPct + '% — lower is better', true, T.payrollPct);
-  }
-  if (tipTotalPct !== null) {
-    ratioHTML += ratioCard('Tips as % of Revenue', tipTotalPct, fmtPct(tipTotalPct), fmt(w.tips) + ' tips on ' + fmt(w.total), false, 11.25);
-  }
-  if (gratuityPct !== null) {
-    ratioHTML += ratioCard('Gratuity as % of Revenue', gratuityPct, fmtPct(gratuityPct), fmt(w.gratuity) + ' gratuity on ' + fmt(w.total), false, 5);
-  }
-  if (revenuePerGuest !== null) {
-    ratioHTML += ratioCard('Revenue per Guest', revenuePerGuest, fmt(revenuePerGuest), w.guests + ' guests', false, T.revPerGuest);
-  }
-  if (fhShare !== null) {
-    ratioHTML += ratioCard('FareHarbor Share', fhShare, fmtPct(fhShare), fmt(w.fh) + ' of ' + fmt(w.total), false, 25);
-  }
-  if (toastShare !== null) {
-    ratioHTML += ratioCard('Toast Share', toastShare, fmtPct(toastShare), fmt(w.toast) + ' of ' + fmt(w.total), false, 75);
-  }
+  if (payrollPct !== null)   ratioHTML += ratioCard('Payroll % of Revenue', payrollPct, fmtPct(payrollPct), 'Target: under ' + T.payrollPct + '% — lower is better', true, T.payrollPct);
+  if (tipTotalPct !== null)  ratioHTML += ratioCard('Tips as % of Revenue', tipTotalPct, fmtPct(tipTotalPct), fmt(w.tips) + ' tips on ' + fmt(w.total), false, 11.25);
+  if (gratuityPct !== null)  ratioHTML += ratioCard('Gratuity as % of Revenue', gratuityPct, fmtPct(gratuityPct), fmt(w.gratuity) + ' gratuity on ' + fmt(w.total), false, 5);
+  if (revPerGuest !== null)  ratioHTML += ratioCard('Revenue per Guest', revPerGuest, fmt(revPerGuest), w.guests + ' guests', false, T.revPerGuest);
+  if (fhShare !== null)      ratioHTML += ratioCard('FareHarbor Share', fhShare, fmtPct(fhShare), fmt(w.fh) + ' of ' + fmt(w.total), false, 25);
+  if (toastShare !== null)   ratioHTML += ratioCard('Toast Share', toastShare, fmtPct(toastShare), fmt(w.toast) + ' of ' + fmt(w.total), false, 75);
   ratioHTML += '</div>';
 
-  // Promos
   var promoHTML = '<div class="promo-grid">';
   promoHTML += simpleCard('Coaster Upsell', w.coaster, 'var(--teal)');
   promoHTML += splitCard('BDAYGIFT', w.fh_bday, w.toast_bday, 'var(--pink)', 'var(--green)', 'FH Booked', 'Studio Used');
@@ -268,13 +230,13 @@ function renderWeek(idx) {
   promoHTML += splitCard('Golden Ticket', w.gt_i, w.gt_u, 'var(--amber)', 'var(--green)', 'Issued', 'Used');
   promoHTML += '</div>';
 
-  var labels = WEEKS.map(function(x) { return x.label; });
-  var totals = WEEKS.map(function(x) { return x.total; });
-  var tips_arr = WEEKS.map(function(x) { return x.tips; });
-  var reviews_arr = WEEKS.map(function(x) { return x.reviews; });
-  var guests_arr = WEEKS.map(function(x) { return x.guests; });
-  var payrollPct_arr = WEEKS.map(function(x) { return (x.payroll && x.total) ? parseFloat((x.payroll/x.total*100).toFixed(1)) : null; });
-  var revPerGuest_arr = WEEKS.map(function(x) { return (x.total && x.guests) ? parseFloat((x.total/x.guests).toFixed(2)) : null; });
+  var labels = WEEKS.map(function(x){ return x.label; });
+  var totals = WEEKS.map(function(x){ return x.total; });
+  var tips_arr = WEEKS.map(function(x){ return x.tips; });
+  var reviews_arr = WEEKS.map(function(x){ return x.reviews; });
+  var guests_arr = WEEKS.map(function(x){ return x.guests; });
+  var payrollPct_arr = WEEKS.map(function(x){ return (x.payroll&&x.total)?parseFloat((x.payroll/x.total*100).toFixed(1)):null; });
+  var revPerGuest_arr = WEEKS.map(function(x){ return (x.total&&x.guests)?parseFloat((x.total/x.guests).toFixed(2)):null; });
 
   var chartsHTML = '<div class="charts-grid">' +
     '<div class="chart-card"><h3>Total Revenue — All Weeks</h3><div class="chart-wrap"><canvas id="cRevenue"></canvas></div></div>' +
@@ -291,7 +253,7 @@ function renderWeek(idx) {
     '<div class="section-title">Promotions</div>' + promoHTML +
     '<div class="section-title">Trends</div>' + chartsHTML;
 
-  var chartOpts = {
+  var baseOpts = {
     responsive:true, maintainAspectRatio:false,
     plugins:{ legend:{display:false} },
     scales:{
@@ -299,54 +261,50 @@ function renderWeek(idx) {
       y:{ ticks:{color:'#888'}, grid:{color:'#222'} }
     }
   };
+  var pctOpts = {
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false} },
+    scales:{
+      x:{ ticks:{color:'#888',font:{size:9}}, grid:{color:'#222'} },
+      y:{ ticks:{color:'#888', callback:function(v){ return v+'%'; }}, grid:{color:'#222'} }
+    }
+  };
+  var dollarOpts = {
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false} },
+    scales:{
+      x:{ ticks:{color:'#888',font:{size:9}}, grid:{color:'#222'} },
+      y:{ ticks:{color:'#888', callback:function(v){ return '$'+v; }}, grid:{color:'#222'} }
+    }
+  };
 
-  new Chart(document.getElementById('cRevenue'), {
-    type:'bar',
-    data:{ labels:labels, datasets:[
-      { data:totals, backgroundColor:totals.map(function(v){ return v>=T.total?'rgba(0,200,150,.7)':v>=T.total*.75?'rgba(245,158,11,.7)':'rgba(239,68,68,.7)'; }), borderRadius:4 },
-      { type:'line', data:labels.map(function(){ return T.total; }), borderColor:'rgba(255,255,255,.3)', borderDash:[4,4], pointRadius:0 }
-    ]},
-    options:chartOpts
-  });
+  new Chart(document.getElementById('cRevenue'), { type:'bar', data:{ labels:labels, datasets:[
+    { data:totals, backgroundColor:totals.map(function(v){ return v>=T.total?'rgba(0,200,150,.7)':v>=T.total*.75?'rgba(245,158,11,.7)':'rgba(239,68,68,.7)'; }), borderRadius:4 },
+    { type:'line', data:labels.map(function(){ return T.total; }), borderColor:'rgba(255,255,255,.3)', borderDash:[4,4], pointRadius:0 }
+  ]}, options:baseOpts });
 
-  new Chart(document.getElementById('cPayrollPct'), {
-    type:'bar',
-    data:{ labels:labels, datasets:[
-      { data:payrollPct_arr, backgroundColor:payrollPct_arr.map(function(v){ return v===null?'rgba(100,100,100,.3)':v<=T.payrollPct*.85?'rgba(0,200,150,.7)':v<=T.payrollPct?'rgba(245,158,11,.7)':'rgba(239,68,68,.7)'; }), borderRadius:4 },
-      { type:'line', data:labels.map(function(){ return T.payrollPct; }), borderColor:'rgba(255,255,255,.3)', borderDash:[4,4], pointRadius:0 }
-    ]},
-    options: Object.assign({}, chartOpts, { scales: Object.assign({}, chartOpts.scales, { y: Object.assign({}, chartOpts.scales.y, { ticks: { color:'#888', callback: function(v){ return v+'%'; } } }) }) })
-  });
+  new Chart(document.getElementById('cPayrollPct'), { type:'bar', data:{ labels:labels, datasets:[
+    { data:payrollPct_arr, backgroundColor:payrollPct_arr.map(function(v){ return v===null?'rgba(100,100,100,.3)':v<=T.payrollPct*.85?'rgba(0,200,150,.7)':v<=T.payrollPct?'rgba(245,158,11,.7)':'rgba(239,68,68,.7)'; }), borderRadius:4 },
+    { type:'line', data:labels.map(function(){ return T.payrollPct; }), borderColor:'rgba(255,255,255,.3)', borderDash:[4,4], pointRadius:0 }
+  ]}, options:pctOpts });
 
-  new Chart(document.getElementById('cRevPerGuest'), {
-    type:'bar',
-    data:{ labels:labels, datasets:[
-      { data:revPerGuest_arr, backgroundColor:revPerGuest_arr.map(function(v){ return v===null?'rgba(100,100,100,.3)':v>=T.revPerGuest?'rgba(0,200,150,.7)':v>=T.revPerGuest*.75?'rgba(245,158,11,.7)':'rgba(239,68,68,.7)'; }), borderRadius:4 },
-      { type:'line', data:labels.map(function(){ return T.revPerGuest; }), borderColor:'rgba(255,255,255,.3)', borderDash:[4,4], pointRadius:0 }
-    ]},
-    options: Object.assign({}, chartOpts, { scales: Object.assign({}, chartOpts.scales, { y: Object.assign({}, chartOpts.scales.y, { ticks: { color:'#888', callback: function(v){ return '$'+v; } } }) }) })
-  });
+  new Chart(document.getElementById('cRevPerGuest'), { type:'bar', data:{ labels:labels, datasets:[
+    { data:revPerGuest_arr, backgroundColor:revPerGuest_arr.map(function(v){ return v===null?'rgba(100,100,100,.3)':v>=T.revPerGuest?'rgba(0,200,150,.7)':v>=T.revPerGuest*.75?'rgba(245,158,11,.7)':'rgba(239,68,68,.7)'; }), borderRadius:4 },
+    { type:'line', data:labels.map(function(){ return T.revPerGuest; }), borderColor:'rgba(255,255,255,.3)', borderDash:[4,4], pointRadius:0 }
+  ]}, options:dollarOpts });
 
-  new Chart(document.getElementById('cTips'), {
-    type:'bar',
-    data:{ labels:labels, datasets:[{ data:tips_arr, backgroundColor:'rgba(0,169,181,.7)', borderRadius:4 }]},
-    options:chartOpts
-  });
+  new Chart(document.getElementById('cTips'), { type:'bar', data:{ labels:labels, datasets:[
+    { data:tips_arr, backgroundColor:'rgba(0,169,181,.7)', borderRadius:4 }
+  ]}, options:baseOpts });
 
-  new Chart(document.getElementById('cReviews'), {
-    type:'bar',
-    data:{ labels:labels, datasets:[
-      { data:reviews_arr, backgroundColor:reviews_arr.map(function(v){ return v===null?'rgba(100,100,100,.4)':v>=T.reviews?'rgba(0,200,150,.7)':'rgba(245,158,11,.7)'; }), borderRadius:4 },
-      { type:'line', data:labels.map(function(){ return T.reviews; }), borderColor:'rgba(255,255,255,.3)', borderDash:[4,4], pointRadius:0 }
-    ]},
-    options:chartOpts
-  });
+  new Chart(document.getElementById('cReviews'), { type:'bar', data:{ labels:labels, datasets:[
+    { data:reviews_arr, backgroundColor:reviews_arr.map(function(v){ return v===null?'rgba(100,100,100,.4)':v>=T.reviews?'rgba(0,200,150,.7)':'rgba(245,158,11,.7)'; }), borderRadius:4 },
+    { type:'line', data:labels.map(function(){ return T.reviews; }), borderColor:'rgba(255,255,255,.3)', borderDash:[4,4], pointRadius:0 }
+  ]}, options:baseOpts });
 
-  new Chart(document.getElementById('cGuests'), {
-    type:'bar',
-    data:{ labels:labels, datasets:[{ data:guests_arr, backgroundColor:'rgba(91,63,166,.7)', borderRadius:4 }]},
-    options:chartOpts
-  });
+  new Chart(document.getElementById('cGuests'), { type:'bar', data:{ labels:labels, datasets:[
+    { data:guests_arr, backgroundColor:'rgba(91,63,166,.7)', borderRadius:4 }
+  ]}, options:baseOpts });
 }
 
 var tabs = document.getElementById('tabs');
