@@ -68,32 +68,33 @@ h1,h2,h3 { font-family:'DM Serif Display',serif; }
 <script>
 var T = { total:20000, fh:5000, toast:15000, tips:2250, tipPct:15, gratuity:1000, reviews:20, payrollPct:40, revPerGuest:150 };
 
-// All data from PDF export — 100% accurate
+// All data — promos simplified to Plus1 (FH & Toast) only from Oct 2026
 var WEEKS = [
-  { label:"Apr 13-19",  fh:3161.37, toast:8181.21,  total:11342.58, tips:1507.01, tipPct:18.42, gratuity:510.84, fh_bday:null, toast_bday:2,  g20_u:2,  gc_u:null, gt_u:1,  gt_i:1,  coaster:null, thankyou:null, ft:61,  rg:29, guests:90,  pickups:40, reviews:7,  payroll:6874.74 },
-  { label:"Apr 20-26",  fh:3566.54, toast:11323.35, total:14889.89, tips:1562.30, tipPct:13.80, gratuity:505.26, fh_bday:null, toast_bday:2,  g20_u:5,  gc_u:null, gt_u:3,  gt_i:2,  coaster:null, thankyou:null, ft:111, rg:32, guests:143, pickups:31, reviews:21, payroll:7326.92 },
-  { label:"Apr 30-May3", fh:3394.62, toast:8355.00,  total:11749.62, tips:1157.05, tipPct:13.85, gratuity:93.60,  fh_bday:null, toast_bday:0,  g20_u:6,  gc_u:null, gt_u:5,  gt_i:2,  coaster:null, thankyou:null, ft:65,  rg:28, guests:93,  pickups:41, reviews:14, payroll:7465.05 },
-  { label:"May 7-10",   fh:1457.68, toast:18096.50, total:19554.18, tips:2164.05, tipPct:11.96, gratuity:278.10, fh_bday:null, toast_bday:2,  g20_u:6,  gc_u:null, gt_u:6,  gt_i:2,  coaster:null, thankyou:null, ft:105, rg:70, guests:175, pickups:27, reviews:15, payroll:8837.07 },
-  { label:"May 14-17",  fh:4060.91, toast:10002.74, total:14063.65, tips:1323.00, tipPct:13.23, gratuity:127.80, fh_bday:null, toast_bday:6,  g20_u:1,  gc_u:0,    gt_u:2,  gt_i:2,  coaster:null, thankyou:null, ft:86,  rg:31, guests:117, pickups:51, reviews:17, payroll:8679.50 },
-  { label:"May 21-24",  fh:3401.87, toast:10915.83, total:14317.70, tips:1600.51, tipPct:14.66, gratuity:389.70, fh_bday:null, toast_bday:14, g20_u:0,  gc_u:2,    gt_u:3,  gt_i:1,  coaster:null, thankyou:null, ft:82,  rg:47, guests:129, pickups:38, reviews:41, payroll:8376.37 },
-  { label:"May 28-31",  fh:3474.34, toast:14149.51, total:17623.85, tips:1321.84, tipPct:9.34,  gratuity:826.20, fh_bday:null, toast_bday:21, g20_u:7,  gc_u:0,    gt_u:0,  gt_i:2,  coaster:null, thankyou:null, ft:124, rg:34, guests:158, pickups:57, reviews:29, payroll:9724.42 },
-  { label:"Jun 4-7",    fh:4774.04, toast:14251.93, total:19025.97, tips:1704.64, tipPct:11.96, gratuity:0,      fh_bday:null, toast_bday:11, g20_u:0,  gc_u:2,    gt_u:2,  gt_i:2,  coaster:null, thankyou:null, ft:128, rg:40, guests:168, pickups:49, reviews:25, payroll:8715.45 },
-  { label:"Jun 11-14",  fh:3948.05, toast:9376.99,  total:13325.04, tips:1539.33, tipPct:16.42, gratuity:0,      fh_bday:null, toast_bday:17, g20_u:1,  gc_u:0,    gt_u:5,  gt_i:2,  coaster:null, thankyou:null, ft:95,  rg:19, guests:114, pickups:38, reviews:24, payroll:6608.00 },
-  { label:"Jun 18-21",  fh:4556.74, toast:18103.45, total:22660.19, tips:2037.49, tipPct:11.25, gratuity:1316.52,fh_bday:null, toast_bday:11, g20_u:6,  gc_u:2,    gt_u:3,  gt_i:2,  coaster:null, thankyou:null, ft:154, rg:42, guests:196, pickups:45, reviews:28, payroll:9667.00 },
-  { label:"Jun 25-28",  fh:3158.72, toast:11962.00, total:15120.72, tips:1954.45, tipPct:16.34, gratuity:295.20, fh_bday:null, toast_bday:21, g20_u:5,  gc_u:2,    gt_u:5,  gt_i:2,  coaster:null, thankyou:null, ft:116, rg:35, guests:151, pickups:51, reviews:27, payroll:8487.31 },
-  { label:"Jul 2-5",    fh:4958.13, toast:13282.96, total:18241.09, tips:1046.52, tipPct:7.88,  gratuity:498.60, fh_bday:null, toast_bday:11, g20_u:14, gc_u:2,    gt_u:4,  gt_i:2,  coaster:null, thankyou:null, ft:125, rg:34, guests:159, pickups:47, reviews:30, payroll:9071.14 },
-  { label:"Jul 9-12",   fh:3517.32, toast:13352.00, total:16869.32, tips:1894.29, tipPct:14.19, gratuity:806.94, fh_bday:null, toast_bday:17, g20_u:8,  gc_u:6,    gt_u:5,  gt_i:1,  coaster:null, thankyou:null, ft:114, rg:54, guests:168, pickups:63, reviews:null, payroll:8061.30 },
-  { label:"Jul 16-19",  fh:2680.23, toast:14424.12, total:17104.35, tips:1478.45, tipPct:10.25, gratuity:924.66, fh_bday:8,    toast_bday:11, g20_u:6,  gc_u:11,   gt_u:4,  gt_i:0,  coaster:null, thankyou:null, ft:142, rg:20, guests:162, pickups:52, reviews:null, payroll:8818.84 },
-  { label:"Jul 23-26",  fh:3595.99, toast:13122.92, total:16718.91, tips:1903.69, tipPct:14.51, gratuity:118.80, fh_bday:4,    toast_bday:10, g20_u:5,  gc_u:4,    gt_u:5,  gt_i:12, coaster:15,   thankyou:null, ft:112, rg:41, guests:153, pickups:58, reviews:27, payroll:8818.06 },
-  { label:"Jul 30-Aug2",fh:3060.82, toast:11425.50, total:14486.32, tips:1582.95, tipPct:13.85, gratuity:50.40,  fh_bday:4,    toast_bday:8,  g20_u:8,  gc_u:8,    gt_u:1,  gt_i:2,  coaster:8,    thankyou:null, ft:84,  rg:37, guests:121, pickups:42, reviews:25, payroll:8975.06 },
-  { label:"Aug 6-9",    fh:3007.00, toast:13761.82, total:16768.82, tips:1092.24, tipPct:7.94,  gratuity:603.00, fh_bday:4,    toast_bday:8,  g20_u:8,  gc_u:5,    gt_u:3,  gt_i:2,  coaster:4,    thankyou:null, ft:94,  rg:38, guests:132, pickups:46, reviews:23, payroll:9366.09 },
-  { label:"Aug 13-16",  fh:2546.00, toast:9316.00,  total:11862.00, tips:967.20,  tipPct:10.38, gratuity:247.50, fh_bday:4,    toast_bday:12, g20_u:2,  gc_u:1,    gt_u:1,  gt_i:0,  coaster:4,    thankyou:null, ft:60,  rg:28, guests:88,  pickups:37, reviews:18, payroll:7348.73 },
-  { label:"Aug 20-23",  fh:3213.63, toast:11550.75, total:14764.38, tips:1596.79, tipPct:13.82, gratuity:0,      fh_bday:3,    toast_bday:10, g20_u:2,  gc_u:10,   gt_u:4,  gt_i:0,  coaster:1,    thankyou:0,    ft:100, rg:26, guests:126, pickups:36, reviews:36, payroll:7729.93 },
-  { label:"Aug 27-30",  fh:3030.90, toast:10097.99, total:13128.89, tips:908.54,  tipPct:9.00,  gratuity:0,      fh_bday:1,    toast_bday:4,  g20_u:4,  gc_u:4,    gt_u:1,  gt_i:0,  coaster:12,   thankyou:0,    ft:77,  rg:19, guests:96,  pickups:41, reviews:23, payroll:6179.67 },
-  { label:"Sep 3-6",    fh:3875.66, toast:12014.76, total:15890.42, tips:1611.39, tipPct:13.41, gratuity:113.22, fh_bday:3,    toast_bday:3,  g20_u:1,  gc_u:0,    gt_u:2,  gt_i:1,  coaster:5,    thankyou:0,    ft:80,  rg:24, guests:104, pickups:37, reviews:22, payroll:7326.02 },
-  { label:"Sep 10-13",  fh:3582.44, toast:9825.00,  total:13407.44, tips:1012.58, tipPct:10.31, gratuity:389.70, fh_bday:1,    toast_bday:5,  g20_u:2,  gc_u:0,    gt_u:2,  gt_i:3,  coaster:6,    thankyou:1,    ft:68,  rg:30, guests:98,  pickups:34, reviews:16, payroll:7102.06 },
-  { label:"Sep 17-20",  fh:3625.77, toast:12312.45, total:15938.22, tips:1616.36, tipPct:13.13, gratuity:473.40, fh_bday:3,    toast_bday:5,  g20_u:1,  gc_u:0,    gt_u:2,  gt_i:3,  coaster:4,    thankyou:0,    ft:100, rg:32, guests:132, pickups:34, reviews:12, payroll:8160.94 },
-  { label:"Sep 24-27",  fh:2873.72, toast:10782.50, total:13656.22, tips:1857.98, tipPct:17.23, gratuity:803.88, fh_bday:3,    toast_bday:5,  g20_u:6,  gc_u:0,    gt_u:0,  gt_i:0,  coaster:13,   thankyou:0,    ft:80,  rg:25, guests:105, pickups:40, reviews:51, payroll:6704.41 }
+  { label:"Apr 13-19",  fh:3161.37, toast:8181.21,  total:11342.58, tips:1507.01, tipPct:18.42, gratuity:510.84,  fh_plus1:null, toast_plus1:null, ft:61,  rg:29, guests:90,  pickups:40, reviews:7,  payroll:6874.74 },
+  { label:"Apr 20-26",  fh:3566.54, toast:11323.35, total:14889.89, tips:1562.30, tipPct:13.80, gratuity:505.26,  fh_plus1:null, toast_plus1:null, ft:111, rg:32, guests:143, pickups:31, reviews:21, payroll:7326.92 },
+  { label:"Apr 30-May3",fh:3394.62, toast:8355.00,  total:11749.62, tips:1157.05, tipPct:13.85, gratuity:93.60,   fh_plus1:null, toast_plus1:null, ft:65,  rg:28, guests:93,  pickups:41, reviews:14, payroll:7465.05 },
+  { label:"May 7-10",   fh:1457.68, toast:18096.50, total:19554.18, tips:2164.05, tipPct:11.96, gratuity:278.10,  fh_plus1:null, toast_plus1:null, ft:105, rg:70, guests:175, pickups:27, reviews:15, payroll:8837.07 },
+  { label:"May 14-17",  fh:4060.91, toast:10002.74, total:14063.65, tips:1323.00, tipPct:13.23, gratuity:127.80,  fh_plus1:null, toast_plus1:null, ft:86,  rg:31, guests:117, pickups:51, reviews:17, payroll:8679.50 },
+  { label:"May 21-24",  fh:3401.87, toast:10915.83, total:14317.70, tips:1600.51, tipPct:14.66, gratuity:389.70,  fh_plus1:null, toast_plus1:null, ft:82,  rg:47, guests:129, pickups:38, reviews:41, payroll:8376.37 },
+  { label:"May 28-31",  fh:3474.34, toast:14149.51, total:17623.85, tips:1321.84, tipPct:9.34,  gratuity:826.20,  fh_plus1:null, toast_plus1:null, ft:124, rg:34, guests:158, pickups:57, reviews:29, payroll:9724.42 },
+  { label:"Jun 4-7",    fh:4774.04, toast:14251.93, total:19025.97, tips:1704.64, tipPct:11.96, gratuity:0,       fh_plus1:null, toast_plus1:null, ft:128, rg:40, guests:168, pickups:49, reviews:25, payroll:8715.45 },
+  { label:"Jun 11-14",  fh:3948.05, toast:9376.99,  total:13325.04, tips:1539.33, tipPct:16.42, gratuity:0,       fh_plus1:null, toast_plus1:null, ft:95,  rg:19, guests:114, pickups:38, reviews:24, payroll:6608.00 },
+  { label:"Jun 18-21",  fh:4556.74, toast:18103.45, total:22660.19, tips:2037.49, tipPct:11.25, gratuity:1316.52, fh_plus1:null, toast_plus1:null, ft:154, rg:42, guests:196, pickups:45, reviews:28, payroll:9667.00 },
+  { label:"Jun 25-28",  fh:3158.72, toast:11962.00, total:15120.72, tips:1954.45, tipPct:16.34, gratuity:295.20,  fh_plus1:null, toast_plus1:null, ft:116, rg:35, guests:151, pickups:51, reviews:27, payroll:8487.31 },
+  { label:"Jul 2-5",    fh:4958.13, toast:13282.96, total:18241.09, tips:1046.52, tipPct:7.88,  gratuity:498.60,  fh_plus1:null, toast_plus1:null, ft:125, rg:34, guests:159, pickups:47, reviews:30, payroll:9071.14 },
+  { label:"Jul 9-12",   fh:3517.32, toast:13352.00, total:16869.32, tips:1894.29, tipPct:14.19, gratuity:806.94,  fh_plus1:null, toast_plus1:null, ft:114, rg:54, guests:168, pickups:63, reviews:null,payroll:8061.30 },
+  { label:"Jul 16-19",  fh:2680.23, toast:14424.12, total:17104.35, tips:1478.45, tipPct:10.25, gratuity:924.66,  fh_plus1:null, toast_plus1:null, ft:142, rg:20, guests:162, pickups:52, reviews:null,payroll:8818.84 },
+  { label:"Jul 23-26",  fh:3595.99, toast:13122.92, total:16718.91, tips:1903.69, tipPct:14.51, gratuity:118.80,  fh_plus1:null, toast_plus1:null, ft:112, rg:41, guests:153, pickups:58, reviews:27, payroll:8818.06 },
+  { label:"Jul 30-Aug2",fh:3060.82, toast:11425.50, total:14486.32, tips:1582.95, tipPct:13.85, gratuity:50.40,   fh_plus1:null, toast_plus1:null, ft:84,  rg:37, guests:121, pickups:42, reviews:25, payroll:8975.06 },
+  { label:"Aug 6-9",    fh:3007.00, toast:13761.82, total:16768.82, tips:1092.24, tipPct:7.94,  gratuity:603.00,  fh_plus1:null, toast_plus1:null, ft:94,  rg:38, guests:132, pickups:46, reviews:23, payroll:9366.09 },
+  { label:"Aug 13-16",  fh:2546.00, toast:9316.00,  total:11862.00, tips:967.20,  tipPct:10.38, gratuity:247.50,  fh_plus1:null, toast_plus1:null, ft:60,  rg:28, guests:88,  pickups:37, reviews:18, payroll:7348.73 },
+  { label:"Aug 20-23",  fh:3213.63, toast:11550.75, total:14764.38, tips:1596.79, tipPct:13.82, gratuity:0,       fh_plus1:null, toast_plus1:null, ft:100, rg:26, guests:126, pickups:36, reviews:36, payroll:7729.93 },
+  { label:"Aug 27-30",  fh:3030.90, toast:10097.99, total:13128.89, tips:908.54,  tipPct:9.00,  gratuity:0,       fh_plus1:null, toast_plus1:null, ft:77,  rg:19, guests:96,  pickups:41, reviews:23, payroll:6179.67 },
+  { label:"Sep 3-6",    fh:3875.66, toast:12014.76, total:15890.42, tips:1611.39, tipPct:13.41, gratuity:113.22,  fh_plus1:null, toast_plus1:null, ft:80,  rg:24, guests:104, pickups:37, reviews:22, payroll:7326.02 },
+  { label:"Sep 10-13",  fh:3582.44, toast:9825.00,  total:13407.44, tips:1012.58, tipPct:10.31, gratuity:389.70,  fh_plus1:null, toast_plus1:null, ft:68,  rg:30, guests:98,  pickups:34, reviews:16, payroll:7102.06 },
+  { label:"Sep 17-20",  fh:3625.77, toast:12312.45, total:15938.22, tips:1616.36, tipPct:13.13, gratuity:473.40,  fh_plus1:null, toast_plus1:null, ft:100, rg:32, guests:132, pickups:34, reviews:12, payroll:8160.94 },
+  { label:"Sep 24-27",  fh:2873.72, toast:10782.50, total:13656.22, tips:1857.98, tipPct:17.23, gratuity:803.88,  fh_plus1:null, toast_plus1:null, ft:80,  rg:25, guests:105, pickups:40, reviews:51, payroll:6704.41 },
+  { label:"Oct 1-4",    fh:2704.29, toast:14010.24, total:16714.53, tips:3443.60, tipPct:24.58, gratuity:416.70,  fh_plus1:6,    toast_plus1:5,    ft:79,  rg:49, guests:128, pickups:35, reviews:35, payroll:7834.15 }
 ];
 
 function fmt(n) {
@@ -192,12 +193,7 @@ function renderWeek(idx) {
   ratioHTML += '</div>';
 
   var promoHTML = '<div class="promo-grid">';
-  promoHTML += simpleCard('Coaster Upsell', w.coaster, 'var(--teal)');
-  promoHTML += splitCard('BDAYGIFT', w.fh_bday, w.toast_bday, 'var(--pink)', 'var(--green)', 'FH Booked', 'Studio Used');
-  promoHTML += simpleCard('Groupon $20 Used', w.g20_u, 'var(--amber)');
-  promoHTML += simpleCard('Groupon Canvas Used', w.gc_u, 'var(--amber)');
-  promoHTML += splitCard('Golden Ticket', w.gt_i, w.gt_u, 'var(--amber)', 'var(--green)', 'Issued', 'Used');
-  promoHTML += simpleCard('$25 Thank You Cards', w.thankyou, 'var(--text)');
+  promoHTML += splitCard('Plus 1', w.fh_plus1, w.toast_plus1, 'var(--pink)', 'var(--green)', 'FareHarbor', 'Toast');
   promoHTML += '</div>';
 
   var labels = WEEKS.map(function(x){ return x.label; });
