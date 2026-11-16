@@ -76,35 +76,35 @@ h1,h2,h3 { font-family:'DM Serif Display',serif; }
 
 <script>
 var WEEKS = [
-  { label:"Apr 13-19",   fh:3161.37,  toast:8181.21,  total:11342.58, tips:1507.01, tipPct:18.42, gratuity:510.84,  fh_plus1:null, toast_plus1:null, ft:61,  rg:29, guests:90,  pickups:40, reviews:7,    payroll:6874.74 },
-  { label:"Apr 20-26",   fh:3566.54,  toast:11323.35, total:14889.89, tips:1562.30, tipPct:13.80, gratuity:505.26,  fh_plus1:null, toast_plus1:null, ft:111, rg:32, guests:143, pickups:31, reviews:21,   payroll:7326.92 },
-  { label:"Apr 30-May3", fh:3394.62,  toast:8355.00,  total:11749.62, tips:1157.05, tipPct:13.85, gratuity:93.60,   fh_plus1:null, toast_plus1:null, ft:65,  rg:28, guests:93,  pickups:41, reviews:14,   payroll:7465.05 },
-  { label:"May 7-10",    fh:1457.68,  toast:18096.50, total:19554.18, tips:2164.05, tipPct:11.96, gratuity:278.10,  fh_plus1:null, toast_plus1:null, ft:105, rg:70, guests:175, pickups:27, reviews:15,   payroll:8837.07 },
-  { label:"May 14-17",   fh:4060.91,  toast:10002.74, total:14063.65, tips:1323.00, tipPct:13.23, gratuity:127.80,  fh_plus1:null, toast_plus1:null, ft:86,  rg:31, guests:117, pickups:51, reviews:17,   payroll:8679.50 },
-  { label:"May 21-24",   fh:3401.87,  toast:10915.83, total:14317.70, tips:1600.51, tipPct:14.66, gratuity:389.70,  fh_plus1:null, toast_plus1:null, ft:82,  rg:47, guests:129, pickups:38, reviews:41,   payroll:8376.37 },
-  { label:"May 28-31",   fh:3474.34,  toast:14149.51, total:17623.85, tips:1321.84, tipPct:9.34,  gratuity:826.20,  fh_plus1:null, toast_plus1:null, ft:124, rg:34, guests:158, pickups:57, reviews:29,   payroll:9724.42 },
-  { label:"Jun 4-7",     fh:4774.04,  toast:14251.93, total:19025.97, tips:1704.64, tipPct:11.96, gratuity:0,       fh_plus1:null, toast_plus1:null, ft:128, rg:40, guests:168, pickups:49, reviews:25,   payroll:8715.45 },
-  { label:"Jun 11-14",   fh:3948.05,  toast:9376.99,  total:13325.04, tips:1539.33, tipPct:16.42, gratuity:0,       fh_plus1:null, toast_plus1:null, ft:95,  rg:19, guests:114, pickups:38, reviews:24,   payroll:6608.00 },
-  { label:"Jun 18-21",   fh:4556.74,  toast:18103.45, total:22660.19, tips:2037.49, tipPct:11.25, gratuity:1316.52, fh_plus1:null, toast_plus1:null, ft:154, rg:42, guests:196, pickups:45, reviews:28,   payroll:9667.00 },
-  { label:"Jun 25-28",   fh:3158.72,  toast:11962.00, total:15120.72, tips:1954.45, tipPct:16.34, gratuity:295.20,  fh_plus1:null, toast_plus1:null, ft:116, rg:35, guests:151, pickups:51, reviews:27,   payroll:8487.31 },
-  { label:"Jul 2-5",     fh:4958.13,  toast:13282.96, total:18241.09, tips:1046.52, tipPct:7.88,  gratuity:498.60,  fh_plus1:null, toast_plus1:null, ft:125, rg:34, guests:159, pickups:47, reviews:30,   payroll:9071.14 },
-  { label:"Jul 9-12",    fh:3517.32,  toast:13352.00, total:16869.32, tips:1894.29, tipPct:14.19, gratuity:806.94,  fh_plus1:null, toast_plus1:null, ft:114, rg:54, guests:168, pickups:63, reviews:null, payroll:8061.30 },
-  { label:"Jul 16-19",   fh:2680.23,  toast:14424.12, total:17104.35, tips:1478.45, tipPct:10.25, gratuity:924.66,  fh_plus1:null, toast_plus1:null, ft:142, rg:20, guests:162, pickups:52, reviews:null, payroll:8818.84 },
-  { label:"Jul 23-26",   fh:3595.99,  toast:13122.92, total:16718.91, tips:1903.69, tipPct:14.51, gratuity:118.80,  fh_plus1:null, toast_plus1:null, ft:112, rg:41, guests:153, pickups:58, reviews:27,   payroll:8818.06 },
-  { label:"Jul 30-Aug2", fh:3060.82,  toast:11425.50, total:14486.32, tips:1582.95, tipPct:13.85, gratuity:50.40,   fh_plus1:null, toast_plus1:null, ft:84,  rg:37, guests:121, pickups:42, reviews:25,   payroll:8975.06 },
-  { label:"Aug 6-9",     fh:3007.00,  toast:13761.82, total:16768.82, tips:1092.24, tipPct:7.94,  gratuity:603.00,  fh_plus1:null, toast_plus1:null, ft:94,  rg:38, guests:132, pickups:46, reviews:23,   payroll:9366.09 },
-  { label:"Aug 13-16",   fh:2546.00,  toast:9316.00,  total:11862.00, tips:967.20,  tipPct:10.38, gratuity:247.50,  fh_plus1:null, toast_plus1:null, ft:60,  rg:28, guests:88,  pickups:37, reviews:18,   payroll:7348.73 },
-  { label:"Aug 20-23",   fh:3213.63,  toast:11550.75, total:14764.38, tips:1596.79, tipPct:13.82, gratuity:0,       fh_plus1:null, toast_plus1:null, ft:100, rg:26, guests:126, pickups:36, reviews:36,   payroll:7729.93 },
-  { label:"Aug 27-30",   fh:3030.90,  toast:10097.99, total:13128.89, tips:908.54,  tipPct:9.00,  gratuity:0,       fh_plus1:null, toast_plus1:null, ft:77,  rg:19, guests:96,  pickups:41, reviews:23,   payroll:6179.67 },
-  { label:"Sep 3-6",     fh:3875.66,  toast:12014.76, total:15890.42, tips:1611.39, tipPct:13.41, gratuity:113.22,  fh_plus1:null, toast_plus1:null, ft:80,  rg:24, guests:104, pickups:37, reviews:22,   payroll:7326.02 },
-  { label:"Sep 10-13",   fh:3582.44,  toast:9825.00,  total:13407.44, tips:1012.58, tipPct:10.31, gratuity:389.70,  fh_plus1:null, toast_plus1:null, ft:68,  rg:30, guests:98,  pickups:34, reviews:16,   payroll:7102.06 },
-  { label:"Sep 17-20",   fh:3625.77,  toast:12312.45, total:15938.22, tips:1616.36, tipPct:13.13, gratuity:473.40,  fh_plus1:null, toast_plus1:null, ft:100, rg:32, guests:132, pickups:34, reviews:12,   payroll:8160.94 },
-  { label:"Sep 24-27",   fh:2873.72,  toast:10782.50, total:13656.22, tips:1857.98, tipPct:17.23, gratuity:803.88,  fh_plus1:null, toast_plus1:null, ft:80,  rg:25, guests:105, pickups:40, reviews:51,   payroll:6704.41 },
-  { label:"Oct 1-4",     fh:2704.29,  toast:14010.24, total:16714.53, tips:3443.60, tipPct:24.58, gratuity:416.70,  fh_plus1:6,    toast_plus1:5,    ft:79,  rg:49, guests:128, pickups:35, reviews:35,   payroll:7834.15 },
-  { label:"Oct 8-11",    fh:4539.73,  toast:13422.97, total:17962.70, tips:3707.70, tipPct:27.62, gratuity:121.50,  fh_plus1:6,    toast_plus1:3,    ft:103, rg:33, guests:136, pickups:53, reviews:28,   payroll:7954.12 },
-  { label:"Oct 15-18",   fh:4867.03,  toast:12613.00, total:17480.03, tips:3125.52, tipPct:24.78, gratuity:774.90,  fh_plus1:8,    toast_plus1:6,    ft:119, rg:24, guests:143, pickups:49, reviews:29,   payroll:8575.92 },
-  { label:"Oct 22-25",   fh:2829.85,  toast:12901.78, total:15731.63, tips:4093.81, tipPct:31.73, gratuity:555.66,  fh_plus1:5,    toast_plus1:2,    ft:119, rg:25, guests:144, pickups:33, reviews:28,   payroll:9564.76 },
-  { label:"Oct 29-Nov1", fh:3179.61,  toast:12019.59, total:15199.20, tips:3623.09, tipPct:30.14, gratuity:495.00,  fh_plus1:6,    toast_plus1:4,    ft:91,  rg:35, guests:126, pickups:32, reviews:33,   payroll:8355.72 },
+  { label:"Apr 13-19",   stripe:3161.37,  toast:8181.21,  total:11342.58, tips:1507.01, tipPct:18.42, gratuity:510.84,  fh_plus1:null, toast_plus1:null, ft:61,  rg:29, guests:90,  reviews:7,    payroll:6874.74 },
+  { label:"Apr 20-26",   stripe:3566.54,  toast:11323.35, total:14889.89, tips:1562.30, tipPct:13.80, gratuity:505.26,  fh_plus1:null, toast_plus1:null, ft:111, rg:32, guests:143, reviews:21,   payroll:7326.92 },
+  { label:"Apr 30-May3", stripe:3394.62,  toast:8355.00,  total:11749.62, tips:1157.05, tipPct:13.85, gratuity:93.60,   fh_plus1:null, toast_plus1:null, ft:65,  rg:28, guests:93,  reviews:14,   payroll:7465.05 },
+  { label:"May 7-10",    stripe:1457.68,  toast:18096.50, total:19554.18, tips:2164.05, tipPct:11.96, gratuity:278.10,  fh_plus1:null, toast_plus1:null, ft:105, rg:70, guests:175, reviews:15,   payroll:8837.07 },
+  { label:"May 14-17",   stripe:4060.91,  toast:10002.74, total:14063.65, tips:1323.00, tipPct:13.23, gratuity:127.80,  fh_plus1:null, toast_plus1:null, ft:86,  rg:31, guests:117, reviews:17,   payroll:8679.50 },
+  { label:"May 21-24",   stripe:3401.87,  toast:10915.83, total:14317.70, tips:1600.51, tipPct:14.66, gratuity:389.70,  fh_plus1:null, toast_plus1:null, ft:82,  rg:47, guests:129, reviews:41,   payroll:8376.37 },
+  { label:"May 28-31",   stripe:3474.34,  toast:14149.51, total:17623.85, tips:1321.84, tipPct:9.34,  gratuity:826.20,  fh_plus1:null, toast_plus1:null, ft:124, rg:34, guests:158, reviews:29,   payroll:9724.42 },
+  { label:"Jun 4-7",     stripe:4774.04,  toast:14251.93, total:19025.97, tips:1704.64, tipPct:11.96, gratuity:0,       fh_plus1:null, toast_plus1:null, ft:128, rg:40, guests:168, reviews:25,   payroll:8715.45 },
+  { label:"Jun 11-14",   stripe:3948.05,  toast:9376.99,  total:13325.04, tips:1539.33, tipPct:16.42, gratuity:0,       fh_plus1:null, toast_plus1:null, ft:95,  rg:19, guests:114, reviews:24,   payroll:6608.00 },
+  { label:"Jun 18-21",   stripe:4556.74,  toast:18103.45, total:22660.19, tips:2037.49, tipPct:11.25, gratuity:1316.52, fh_plus1:null, toast_plus1:null, ft:154, rg:42, guests:196, reviews:28,   payroll:9667.00 },
+  { label:"Jun 25-28",   stripe:3158.72,  toast:11962.00, total:15120.72, tips:1954.45, tipPct:16.34, gratuity:295.20,  fh_plus1:null, toast_plus1:null, ft:116, rg:35, guests:151, reviews:27,   payroll:8487.31 },
+  { label:"Jul 2-5",     stripe:4958.13,  toast:13282.96, total:18241.09, tips:1046.52, tipPct:7.88,  gratuity:498.60,  fh_plus1:null, toast_plus1:null, ft:125, rg:34, guests:159, reviews:30,   payroll:9071.14 },
+  { label:"Jul 9-12",    stripe:3517.32,  toast:13352.00, total:16869.32, tips:1894.29, tipPct:14.19, gratuity:806.94,  fh_plus1:null, toast_plus1:null, ft:114, rg:54, guests:168, reviews:null, payroll:8061.30 },
+  { label:"Jul 16-19",   stripe:2680.23,  toast:14424.12, total:17104.35, tips:1478.45, tipPct:10.25, gratuity:924.66,  fh_plus1:null, toast_plus1:null, ft:142, rg:20, guests:162, reviews:null, payroll:8818.84 },
+  { label:"Jul 23-26",   stripe:3595.99,  toast:13122.92, total:16718.91, tips:1903.69, tipPct:14.51, gratuity:118.80,  fh_plus1:null, toast_plus1:null, ft:112, rg:41, guests:153, reviews:27,   payroll:8818.06 },
+  { label:"Jul 30-Aug2", stripe:3060.82,  toast:11425.50, total:14486.32, tips:1582.95, tipPct:13.85, gratuity:50.40,   fh_plus1:null, toast_plus1:null, ft:84,  rg:37, guests:121, reviews:25,   payroll:8975.06 },
+  { label:"Aug 6-9",     stripe:3007.00,  toast:13761.82, total:16768.82, tips:1092.24, tipPct:7.94,  gratuity:603.00,  fh_plus1:null, toast_plus1:null, ft:94,  rg:38, guests:132, reviews:23,   payroll:9366.09 },
+  { label:"Aug 13-16",   stripe:2546.00,  toast:9316.00,  total:11862.00, tips:967.20,  tipPct:10.38, gratuity:247.50,  fh_plus1:null, toast_plus1:null, ft:60,  rg:28, guests:88,  reviews:18,   payroll:7348.73 },
+  { label:"Aug 20-23",   stripe:3213.63,  toast:11550.75, total:14764.38, tips:1596.79, tipPct:13.82, gratuity:0,       fh_plus1:null, toast_plus1:null, ft:100, rg:26, guests:126, reviews:36,   payroll:7729.93 },
+  { label:"Aug 27-30",   stripe:3030.90,  toast:10097.99, total:13128.89, tips:908.54,  tipPct:9.00,  gratuity:0,       fh_plus1:null, toast_plus1:null, ft:77,  rg:19, guests:96,  reviews:23,   payroll:6179.67 },
+  { label:"Sep 3-6",     stripe:3875.66,  toast:12014.76, total:15890.42, tips:1611.39, tipPct:13.41, gratuity:113.22,  fh_plus1:null, toast_plus1:null, ft:80,  rg:24, guests:104, reviews:22,   payroll:7326.02 },
+  { label:"Sep 10-13",   stripe:3582.44,  toast:9825.00,  total:13407.44, tips:1012.58, tipPct:10.31, gratuity:389.70,  fh_plus1:null, toast_plus1:null, ft:68,  rg:30, guests:98,  reviews:16,   payroll:7102.06 },
+  { label:"Sep 17-20",   stripe:3625.77,  toast:12312.45, total:15938.22, tips:1616.36, tipPct:13.13, gratuity:473.40,  fh_plus1:null, toast_plus1:null, ft:100, rg:32, guests:132, reviews:12,   payroll:8160.94 },
+  { label:"Sep 24-27",   stripe:2873.72,  toast:10782.50, total:13656.22, tips:1857.98, tipPct:17.23, gratuity:803.88,  fh_plus1:null, toast_plus1:null, ft:80,  rg:25, guests:105, reviews:51,   payroll:6704.41 },
+  { label:"Oct 1-4",     stripe:2704.29,  toast:14010.24, total:16714.53, tips:3443.60, tipPct:24.58, gratuity:416.70,  fh_plus1:6,    toast_plus1:5,    ft:79,  rg:49, guests:128, reviews:35,   payroll:7834.15 },
+  { label:"Oct 8-11",    stripe:4539.73,  toast:13422.97, total:17962.70, tips:3707.70, tipPct:27.62, gratuity:121.50,  fh_plus1:6,    toast_plus1:3,    ft:103, rg:33, guests:136, reviews:28,   payroll:7954.12 },
+  { label:"Oct 15-18",   stripe:4867.03,  toast:12613.00, total:17480.03, tips:3125.52, tipPct:24.78, gratuity:774.90,  fh_plus1:8,    toast_plus1:6,    ft:119, rg:24, guests:143, reviews:29,   payroll:8575.92 },
+  { label:"Oct 22-25",   stripe:2829.85,  toast:12901.78, total:15731.63, tips:4093.81, tipPct:31.73, gratuity:555.66,  fh_plus1:5,    toast_plus1:2,    ft:119, rg:25, guests:144, reviews:28,   payroll:9564.76 },
+  { label:"Oct 29-Nov1", stripe:3179.61,  toast:12019.59, total:15199.20, tips:3623.09, tipPct:30.14, gratuity:495.00,  fh_plus1:6,    toast_plus1:4,    ft:91,  rg:35, guests:126, reviews:33,   payroll:8355.72 },
   { label:"Nov 5-8",     stripe:3536.98, toast:12557.50, total:16094.48, tips:1885.10, tipPct:15.01, gratuity:0,    fh_plus1:9,    toast_plus1:5,    ft:107, rg:18, guests:125, reviews:26, payroll:7808.00 },
   { label:"Nov 12-15",   stripe:386,     toast:16308,   total:16694,   tips:1602.03, tipPct:9.82,  gratuity:488.70, fh_plus1:10,   toast_plus1:5,    ft:126, rg:34, guests:160, reviews:24, payroll:8737.82 }
 ];
@@ -159,46 +159,42 @@ function splitCard(name, aVal, bVal, aColor, bColor, aLabel, bLabel) {
 
 function renderWeek(idx) {
   var w = WEEKS[idx];
-  var payrollPct  = (w.payroll && w.total)   ? (w.payroll / w.total * 100) : null;
-  var revPerGuest = (w.total && w.guests)    ? (w.total / w.guests)        : null;
-  var fhShare     = (w.fh && w.total)        ? (w.fh / w.total * 100)      : null;
-  var toastShare  = (w.toast && w.total)     ? (w.toast / w.total * 100)   : null;
-  var tipOfRev    = (w.tips && w.total)      ? (w.tips / w.total * 100)    : null;
+  var payrollPct  = (w.payroll && w.total)     ? (w.payroll / w.total * 100)   : null;
+  var revPerGuest = (w.total && w.guests)      ? (w.total / w.guests)          : null;
+  var stripeShare = (w.stripe && w.total)      ? (w.stripe / w.total * 100)    : null;
+  var toastShare  = (w.toast && w.total)       ? (w.toast / w.total * 100)     : null;
+  var tipOfRev    = (w.tips && w.total)        ? (w.tips / w.total * 100)      : null;
+  var stripeLabel = 'Stripe';
 
   // ── KPIs ──
   var kpiHTML = '<div class="kpi-grid">';
-  kpiHTML += kpiCard('Total Revenue',   fmt(w.total),    'FH + Toast combined',                        'var(--pink)');
-  kpiHTML += kpiCard('FareHarbor',      fmt(w.fh),       fhShare ? fmtPct(fhShare) + ' of total'  : null, 'var(--teal)');
-  kpiHTML += kpiCard('Toast POS',       fmt(w.toast),    toastShare ? fmtPct(toastShare) + ' of total' : null, 'var(--sky)');
-  kpiHTML += kpiCard('Tips',            fmt(w.tips),     tipOfRev ? fmtPct(tipOfRev) + ' of revenue' : null, 'var(--gold)');
+  kpiHTML += kpiCard('Total Revenue',   fmt(w.total),    'Toast + Stripe combined',                            'var(--pink)');
+  kpiHTML += kpiCard(stripeLabel,       fmt(w.stripe),   stripeShare ? fmtPct(stripeShare) + ' of total' : null, 'var(--teal)');
+  kpiHTML += kpiCard('Toast POS',       fmt(w.toast),    toastShare ? fmtPct(toastShare) + ' of total' : null,  'var(--sky)');
+  kpiHTML += kpiCard('Tips',            fmt(w.tips),     tipOfRev ? fmtPct(tipOfRev) + ' of revenue' : null,   'var(--gold)');
   kpiHTML += kpiCard('Tip %',           w.tipPct !== null ? w.tipPct.toFixed(2) + '%' : '—', 'Guest tip rate on Toast', 'var(--gold)');
-  if (w.gratuity > 0 || w.gratuity === 0) {
-    kpiHTML += kpiCard('Gratuity',      fmt(w.gratuity), w.gratuity > 0 ? 'Auto-grat collected' : 'No auto-grat this week', 'var(--purple)');
-  }
-  kpiHTML += kpiCard('Google Reviews',  fmtN(w.reviews), 'New reviews this week',                     'var(--pink)');
-  kpiHTML += kpiCard('Total Guests',    fmtN(w.guests),  'FT: ' + fmtN(w.ft) + '  ·  RG: ' + fmtN(w.rg), 'var(--teal)');
-  if (w.pickups !== null) {
-    kpiHTML += kpiCard('Pickups',       fmtN(w.pickups), 'Pickup experiences',                        'var(--purple)');
-  }
+  kpiHTML += kpiCard('Gratuity',        fmt(w.gratuity), w.gratuity > 0 ? 'Auto-grat collected' : 'No auto-grat this week', 'var(--purple)');
+  kpiHTML += kpiCard('Google Reviews',  fmtN(w.reviews), 'New reviews this week',                              'var(--pink)');
+  kpiHTML += kpiCard('Total Guests',    fmtN(w.guests),  'FT: ' + fmtN(w.ft) + '  ·  RG: ' + fmtN(w.rg),    'var(--teal)');
   kpiHTML += kpiCard('Payroll',         fmt(w.payroll),  payrollPct ? fmtPct(payrollPct) + ' of revenue' : null, 'var(--sky)');
   kpiHTML += '</div>';
 
   // ── RATIOS ──
   var ratioHTML = '<div class="ratio-grid">';
-  if (revPerGuest !== null) ratioHTML += ratioCard('Revenue per Guest',    fmt(revPerGuest),         w.guests + ' guests · ' + fmt(w.total) + ' total',      'var(--pink)');
-  if (payrollPct !== null)  ratioHTML += ratioCard('Payroll % of Revenue', fmtPct(payrollPct),       fmt(w.payroll) + ' payroll on ' + fmt(w.total),          'var(--sky)');
-  if (tipOfRev !== null)    ratioHTML += ratioCard('Tips % of Revenue',    fmtPct(tipOfRev),         fmt(w.tips) + ' tips on ' + fmt(w.total),                'var(--gold)');
-  if (fhShare !== null)     ratioHTML += ratioCard('FareHarbor Share',     fmtPct(fhShare),          fmt(w.fh) + ' of ' + fmt(w.total),                       'var(--teal)');
-  if (toastShare !== null)  ratioHTML += ratioCard('Toast Share',          fmtPct(toastShare),       fmt(w.toast) + ' of ' + fmt(w.total),                    'var(--sky)');
+  if (revPerGuest !== null) ratioHTML += ratioCard('Revenue per Guest',    fmt(revPerGuest),   w.guests + ' guests · ' + fmt(w.total) + ' total',   'var(--pink)');
+  if (payrollPct !== null)  ratioHTML += ratioCard('Payroll % of Revenue', fmtPct(payrollPct), fmt(w.payroll) + ' payroll on ' + fmt(w.total),       'var(--sky)');
+  if (tipOfRev !== null)    ratioHTML += ratioCard('Tips % of Revenue',    fmtPct(tipOfRev),   fmt(w.tips) + ' tips on ' + fmt(w.total),             'var(--gold)');
+  if (stripeShare !== null) ratioHTML += ratioCard(stripeLabel + ' Share', fmtPct(stripeShare),fmt(w.stripe) + ' of ' + fmt(w.total),                'var(--teal)');
+  if (toastShare !== null)  ratioHTML += ratioCard('Toast Share',          fmtPct(toastShare), fmt(w.toast) + ' of ' + fmt(w.total),                 'var(--sky)');
   if (w.guests && w.reviews !== null) {
-    var revPerGuest2 = (w.reviews / w.guests * 100);
-    ratioHTML += ratioCard('Review Conversion', fmtPct(revPerGuest2),     w.reviews + ' reviews from ' + w.guests + ' guests',                               'var(--pink)');
+    var revConv = (w.reviews / w.guests * 100);
+    ratioHTML += ratioCard('Review Conversion', fmtPct(revConv), w.reviews + ' reviews from ' + w.guests + ' guests', 'var(--pink)');
   }
   ratioHTML += '</div>';
 
   // ── PROMOTIONS ──
   var promoHTML = '<div class="promo-grid">';
-  promoHTML += splitCard('Plus 1 Upsells', w.fh_plus1, w.toast_plus1, '#FF1D8E', '#00A9B5', 'FareHarbor', 'Toast');
+  promoHTML += splitCard('Plus 1 Upsells', w.fh_plus1, w.toast_plus1, '#FF1D8E', '#00A9B5', 'Booking', 'Toast');
   promoHTML += '</div>';
 
   // ── CHARTS (all weeks) ──
@@ -211,7 +207,7 @@ function renderWeek(idx) {
   var revPerG_arr    = WEEKS.map(function(x){ return (x.total&&x.guests)?parseFloat((x.total/x.guests).toFixed(2)):null; });
 
   var chartsHTML = '<div class="charts-grid">' +
-    '<div class="chart-card"><div class="chart-title">Total Revenue</div><div class="chart-subtitle">All weeks — FH + Toast</div><div class="chart-wrap"><canvas id="cRevenue"></canvas></div></div>' +
+    '<div class="chart-card"><div class="chart-title">Total Revenue</div><div class="chart-subtitle">All weeks — Toast + Stripe</div><div class="chart-wrap"><canvas id="cRevenue"></canvas></div></div>' +
     '<div class="chart-card"><div class="chart-title">Tips</div><div class="chart-subtitle">Total tips collected each week</div><div class="chart-wrap"><canvas id="cTips"></canvas></div></div>' +
     '<div class="chart-card"><div class="chart-title">Total Guests</div><div class="chart-subtitle">FT + RG combined</div><div class="chart-wrap"><canvas id="cGuests"></canvas></div></div>' +
     '<div class="chart-card"><div class="chart-title">Revenue per Guest</div><div class="chart-subtitle">Total revenue ÷ guests</div><div class="chart-wrap"><canvas id="cRevPerGuest"></canvas></div></div>' +
