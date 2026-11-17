@@ -195,6 +195,9 @@ function renderWeek(idx) {
   // ── PROMOTIONS ──
   var promoHTML = '<div class="promo-grid">';
   promoHTML += splitCard('Plus 1 Upsells', w.fh_plus1, w.toast_plus1, '#FF1D8E', '#00A9B5', 'Booking', 'Toast');
+  // Golden tickets issued that week (from the check-in app: Settings > Golden tickets). Tracked from Nov 16, 2026.
+  promoHTML += '<div class="promo-card"><div class="promo-name">Golden Tickets Issued</div><div class="promo-val" style="color:' + (w.golden == null ? 'var(--muted)' : '#F4B942') + '">' + (w.golden == null ? '—' : w.golden) + '</div>' +
+    (w.golden == null ? '<div class="kpi-sub">Tracked from Nov 16</div>' : (w.guests ? '<div class="kpi-sub">' + fmtPct(w.golden / w.guests * 100) + ' of guests</div>' : '')) + '</div>';
   promoHTML += '</div>';
 
   // ── CHARTS (all weeks) ──
@@ -204,6 +207,7 @@ function renderWeek(idx) {
   var reviews_arr    = WEEKS.map(function(x){ return x.reviews; });
   var guests_arr     = WEEKS.map(function(x){ return x.guests; });
   var payrollPct_arr = WEEKS.map(function(x){ return (x.payroll&&x.total)?parseFloat((x.payroll/x.total*100).toFixed(1)):null; });
+  var golden_arr     = WEEKS.map(function(x){ return x.golden == null ? null : x.golden; });
   var revPerG_arr    = WEEKS.map(function(x){ return (x.total&&x.guests)?parseFloat((x.total/x.guests).toFixed(2)):null; });
 
   var chartsHTML = '<div class="charts-grid">' +
@@ -213,6 +217,7 @@ function renderWeek(idx) {
     '<div class="chart-card"><div class="chart-title">Revenue per Guest</div><div class="chart-subtitle">Total revenue ÷ guests</div><div class="chart-wrap"><canvas id="cRevPerGuest"></canvas></div></div>' +
     '<div class="chart-card"><div class="chart-title">Payroll % of Revenue</div><div class="chart-subtitle">Labor cost as a share of weekly revenue</div><div class="chart-wrap"><canvas id="cPayrollPct"></canvas></div></div>' +
     '<div class="chart-card"><div class="chart-title">Google Reviews</div><div class="chart-subtitle">New reviews per week</div><div class="chart-wrap"><canvas id="cReviews"></canvas></div></div>' +
+    '<div class="chart-card"><div class="chart-title">Golden Tickets</div><div class="chart-subtitle">Issued per week (tracked from Nov 16)</div><div class="chart-wrap"><canvas id="cGolden"></canvas></div></div>' +
     '</div>';
 
   document.getElementById('main').innerHTML =
@@ -234,6 +239,7 @@ function renderWeek(idx) {
   new Chart(document.getElementById('cRevPerGuest'),{ type:'bar', data:{ labels:labels, datasets:[{ data:revPerG_arr,    backgroundColor:SKY,    borderRadius:3, borderSkipped:false }]}, options:Object.assign({},base,{ scales:{ x:xScale, y:yDollar } }) });
   new Chart(document.getElementById('cPayrollPct'), { type:'bar', data:{ labels:labels, datasets:[{ data:payrollPct_arr, backgroundColor:PURPLE, borderRadius:3, borderSkipped:false }]}, options:Object.assign({},base,{ scales:{ x:xScale, y:yPct   } }) });
   new Chart(document.getElementById('cReviews'),    { type:'bar', data:{ labels:labels, datasets:[{ data:reviews_arr,   backgroundColor:PINK,   borderRadius:3, borderSkipped:false }]}, options:Object.assign({},base,{ scales:{ x:xScale, y:yScale  } }) });
+  new Chart(document.getElementById('cGolden'),    { type:'bar', data:{ labels:labels, datasets:[{ data:golden_arr,    backgroundColor:GOLD,   borderRadius:3, borderSkipped:false }]}, options:Object.assign({},base,{ scales:{ x:xScale, y:yScale  } }) });
 }
 
 // Build tabs
